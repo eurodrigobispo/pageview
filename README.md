@@ -15,7 +15,7 @@ Worker. O preview fica em `https://seu-worker.workers.dev/nome-da-pagina`.
 
 ### 1. Suba o backend (1 clique)
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/SEU-USUARIO/pageview)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/eurodrigobispo/pageview)
 
 O botão cria o Worker e o bucket R2 na sua conta Cloudflare automaticamente.
 

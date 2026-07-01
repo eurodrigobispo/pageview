@@ -7,7 +7,4 @@
   "Testar conexão".
 - Exportação em WebP com toggle Qualidade/Tamanho e fallback para PNG.
 - Repositório reorganizado (`plugin/`, `worker/`, `docs/`) com README e licença.
-
-> Pendência: trocar `SEU-USUARIO/pageview` pelo caminho real do repositório em
-> `README.md` e em `plugin/ui.html` (função `updateDeployHref`) após publicar no
-> GitHub.
+- Botão "Deploy to Cloudflare" apontando para `github.com/eurodrigobispo/pageview`.
