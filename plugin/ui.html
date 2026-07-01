@@ -274,7 +274,12 @@
       send({ type:"save-settings", workerUrl:base, secret:secret });
       show("wizard"); goStep(1);
     } catch (err) {
-      $("onbStatus").textContent = (err && err.message) || String(err);
+      var m = (err && err.message) || String(err);
+      // fetch bloqueado pelo sandbox / rede inalcançável lança TypeError
+      if (err instanceof TypeError) {
+        m = "Não consegui alcançar o Worker. Confira a URL. Se você usa domínio próprio, adicione-o em networkAccess.allowedDomains no manifest.json.";
+      }
+      $("onbStatus").textContent = m;
       $("onbStatus").classList.remove("hidden");
     } finally {
       $("testBtn").textContent = "Testar conexão"; refreshTestBtn();
@@ -440,7 +445,7 @@
       if (!res.ok) throw new Error("Falha ao remover (" + res.status + ")");
       notify("Preview removido: " + slug);
       await loadList();
-    } catch (err){ notify((err && err.message) || String(err)); }
+    } catch (err){ notify((err && err.message) || String(err)); loadList(); /* re-render pra reabilitar o botão */ }
   }
 
   // ---------- mensagens vindas do code.js ----------
