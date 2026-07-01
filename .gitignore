@@ -6,3 +6,4 @@ node_modules/
 docs/superpowers/
 .playwright-mcp/
 readme-render.png
+.wrangler/
