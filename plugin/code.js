@@ -143,11 +143,18 @@ figma.ui.onmessage = async function (msg) {
         workerUrl: (await figma.clientStorage.getAsync("pv_worker_url")) || "",
         secret: (await figma.clientStorage.getAsync("pv_secret")) || ""
       });
+      figma.ui.postMessage({
+        type: "removed",
+        items: (await figma.clientStorage.getAsync("pv_removed")) || []
+      });
       notifySelection();
     }
     if (msg.type === "save-settings") {
       if (msg.workerUrl != null) await figma.clientStorage.setAsync("pv_worker_url", msg.workerUrl);
       if (msg.secret != null) await figma.clientStorage.setAsync("pv_secret", msg.secret);
+    }
+    if (msg.type === "save-removed") {
+      await figma.clientStorage.setAsync("pv_removed", msg.items || []);
     }
     if (msg.type === "export") {
       var frame = getSelectedFrame();

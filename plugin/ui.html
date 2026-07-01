@@ -2,55 +2,41 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: var(--figma-color-bg, #0b0b0b);
-    --card: var(--figma-color-bg-secondary, #161616);
-    --field: var(--figma-color-bg-tertiary, #1e1e1e);
-    --border: var(--figma-color-border, #2a2a2a);
-    --text: var(--figma-color-text, #eaeaea);
-    --muted: var(--figma-color-text-secondary, #8c8c8c);
-    --onbtn: var(--figma-color-text-onbrand, #fff);
-    --brand: var(--figma-color-bg-brand, #0d99ff);
-    --danger: #e24b4a;
+    --bg:#202020; --card:#282828; --field:#2E2E2E; --border:#3A3A3A;
+    --text:#ECECEC; --muted:#8F8F8F; --blue:#1580FF; --green:#3FD07A; --danger:#E24B4A;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
     background:var(--bg); color:var(--text);
-    font:400 12px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;
+    font:400 12px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     padding:16px; -webkit-font-smoothing:antialiased;
   }
   .hidden{display:none !important}
 
   /* header */
-  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-  .brand{display:flex;align-items:center;gap:8px}
-  .iso{height:18px;width:18px;color:var(--text)}
-  .spin .iso path{animation:pvdot 1s linear infinite}
-  @keyframes pvdot{0%{opacity:1}100%{opacity:.08}}
-  h1{font:600 14px/1 inherit;letter-spacing:.01em}
+  .top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+  h1{font:400 18px/1.1 "Plus Jakarta Sans",-apple-system,sans-serif;letter-spacing:.01em}
+  h2{font:400 12px/1.3 "Plus Jakarta Sans",-apple-system,sans-serif;color:var(--muted);margin-top:3px}
   .top-actions{display:flex;align-items:center;gap:6px}
   .icon-btn{background:transparent;border:1px solid var(--border);color:var(--muted);
-    border-radius:6px;padding:4px 8px;font:inherit;cursor:pointer;width:auto}
+    border-radius:6px;padding:5px 9px;font:inherit;cursor:pointer;width:auto;white-space:nowrap}
   .icon-btn:hover{color:var(--text);border-color:var(--muted)}
 
-  /* steps indicator */
-  .steps{display:flex;align-items:center;gap:6px;margin-bottom:14px}
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--border)}
-  .dot.active{background:var(--text)}
-  .dot.done{background:var(--muted)}
-  .steps .line{flex:0 0 18px;height:1px;background:var(--border)}
-  .steplabel{margin-left:auto;color:var(--muted);font-size:11px}
-
-  .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px}
   .label{color:var(--muted);font-size:11px;margin-bottom:6px;display:block}
   input[type=text],input[type=password]{
     width:100%;background:var(--field);border:1px solid var(--border);border-radius:8px;
     color:var(--text);padding:9px 10px;font:inherit;outline:none;
   }
-  input:focus{border-color:var(--brand)}
-  .gap{height:12px}
-  .hint{font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.5}
+  input:focus{border-color:var(--blue)}
+  .gap{height:10px}
+  .hint{font-size:10.5px;color:var(--muted);margin-top:7px;line-height:1.6}
+  .hl{color:var(--text);background:rgba(21,128,255,.14);border:1px solid rgba(21,128,255,.34);
+    border-radius:4px;padding:0 5px;font-weight:600;white-space:nowrap}
   .finalurl{margin-top:8px;font-size:10.5px;color:var(--muted);word-break:break-all}
   .finalurl span{color:var(--text)}
   .frame-info{font-size:12px;color:var(--muted);line-height:1.7}
@@ -59,12 +45,12 @@
     border-radius:5px;padding:1px 7px;font-size:10px;color:var(--text);margin-left:6px}
 
   .check{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;margin-top:12px}
-  .check input{accent-color:var(--brand)}
+  .check input{accent-color:var(--blue)}
 
-  /* segmented toggle (qualidade/tamanho) */
+  /* segmented toggle */
   .seg{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:6px}
   .seg button{flex:1;background:var(--field);color:var(--muted);border:0;border-radius:0;
-    padding:8px;font:inherit;cursor:pointer}
+    padding:8px;font:inherit;cursor:pointer;width:auto}
   .seg button.on{background:var(--text);color:var(--bg)}
 
   /* buttons */
@@ -72,40 +58,73 @@
     padding:11px;font:600 12px/1 inherit;cursor:pointer;letter-spacing:.02em}
   button:hover:not(:disabled){opacity:.9}
   button:disabled{opacity:.35;cursor:default}
-  .row-btns{display:flex;gap:8px}
+  .btn-blue{background:var(--blue);color:#fff}
   .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
   .btn-ghost:hover:not(:disabled){background:var(--card)}
-  .btn-brand{background:var(--brand);color:var(--onbtn)}
-  .btn-link{display:inline-block;text-align:center;text-decoration:none;background:var(--brand);
-    color:var(--onbtn);border-radius:8px;padding:11px;font:600 12px/1 inherit}
+  .row-btns{display:flex;gap:8px}
 
-  #status{margin-top:10px;font-size:11px;color:var(--muted);min-height:16px}
+  /* onboarding tutorial (visual) */
+  .step-row{display:flex;gap:12px}
+  .step-ic{flex:0 0 34px;height:34px;border-radius:9px;background:var(--field);
+    border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--blue)}
+  .step-ic svg{width:17px;height:17px}
+  .step-body{flex:1;min-width:0}
+  .step-title{font-size:12px;font-weight:600;color:var(--text);margin-bottom:8px}
+  .step-title .n{color:var(--muted);font-weight:400;margin-right:4px}
+
+  /* wizard single-screen com seções que destravam */
+  .step{margin-bottom:12px;transition:opacity .2s}
+  .step-head{display:flex;align-items:center;gap:9px;margin-bottom:8px;font-size:12px;font-weight:600}
+  .step-num{flex:0 0 22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600}
+  .step.locked .step-num{background:var(--field);color:var(--muted)}
+  .step.locked .lock{display:inline}
+  .lock{display:none;margin-left:auto;color:var(--muted);font-size:11px}
+  .step-body-wrap{transition:opacity .2s}
+  .step.locked .step-body-wrap{opacity:.4;pointer-events:none;filter:saturate(.4)}
+
+  /* barra de progresso */
+  #progressWrap{height:6px;background:var(--field);border-radius:4px;overflow:hidden;margin:4px 0 8px}
+  #progressBar{height:100%;width:0;background:var(--blue);border-radius:4px;transition:width .25s ease}
+  #status{font-size:11px;color:var(--muted);min-height:15px}
   #status.error{color:var(--danger)}
   #result a{color:var(--text);word-break:break-all;text-decoration:underline;text-underline-offset:3px;font-size:12px}
 
   /* lista "no ar" */
-  #list{max-height:300px;overflow-y:auto}
+  .list-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  #clearList{width:auto;background:transparent;color:var(--muted);border:1px solid var(--border);
+    padding:5px 9px;font-size:10.5px;border-radius:6px}
+  #clearList:hover:not(:disabled){color:var(--text)}
+  #clearList.confirm{border-color:var(--danger);color:var(--danger)}
+  #list{max-height:330px;overflow-y:auto}
   #list::-webkit-scrollbar{width:6px}
   #list::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-  .lrow{display:flex;align-items:center;gap:8px;padding:9px 0;border-top:1px solid var(--border)}
+  .lrow{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--border);transition:opacity .3s}
   .lrow:first-child{border-top:0}
+  .lrow.inactive{opacity:.42}
+  .lrow-ic{flex:0 0 20px;color:var(--muted)}
+  .lrow-ic svg{width:18px;height:18px;display:block}
   .lrow-main{flex:1;min-width:0}
   .lrow-main a{color:var(--text);font-size:12px;text-decoration:none;display:block;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .lrow-main a:hover{text-decoration:underline;text-underline-offset:3px}
+  .lrow.inactive .lrow-main a{color:var(--muted)}
   .lrow-meta{color:var(--muted);font-size:10px}
+  .dot{flex:0 0 9px;width:9px;height:9px;border-radius:50%}
+  .dot.on{background:var(--green);box-shadow:0 0 7px 1px rgba(63,208,122,.8)}
+  .dot.off{background:#4a4a4a;box-shadow:none}
   .lrow button{width:auto;background:transparent;color:var(--muted);border:1px solid var(--border);
     padding:5px 9px;font-size:10.5px;border-radius:6px;white-space:nowrap}
   .lrow button:hover:not(:disabled){background:var(--card);color:var(--text)}
   .lrow button.confirm{border-color:var(--danger);color:var(--danger)}
-  .empty{color:var(--muted);font-size:11px;padding:6px 0}
+  .empty{color:var(--muted);font-size:11px;padding:8px 0}
 </style>
 </head>
 <body>
   <div class="top">
-    <div class="brand" id="brand">
-      <svg class="iso" viewBox="0 0 865 865" xmlns="http://www.w3.org/2000/svg"><path d="M144.078 482.662C144.078 494.597 134.402 504.273 122.466 504.273H21.6117C9.67589 504.273 0 494.597 0 482.662V381.807C0 369.871 9.67588 360.196 21.6117 360.196H122.466C134.402 360.196 144.078 369.871 144.078 381.807V482.662Z" fill="currentColor"/><path d="M504.27 842.856C504.27 854.792 494.594 864.468 482.659 864.468H381.804C369.868 864.468 360.192 854.792 360.192 842.856V742.002C360.192 730.066 369.868 720.39 381.804 720.39H482.659C494.594 720.39 504.27 730.066 504.27 742.002V842.856Z" fill="currentColor"/><path d="M864.466 482.662C864.466 494.597 854.79 504.273 842.854 504.273H742C730.064 504.273 720.388 494.597 720.388 482.662V381.807C720.388 369.871 730.064 360.196 742 360.196H842.854C854.79 360.196 864.466 369.871 864.466 381.807V482.662Z" fill="currentColor"/><path d="M504.27 122.467C504.27 134.403 494.594 144.079 482.659 144.079H381.804C369.868 144.079 360.192 134.403 360.192 122.467V21.6127C360.192 9.67686 369.868 0.000976562 381.804 0.000976562H482.659C494.594 0.000976562 504.27 9.67685 504.27 21.6127V122.467Z" fill="currentColor"/></svg>
+    <div>
       <h1>Pageview</h1>
+      <h2>Preview de páginas ao vivo</h2>
     </div>
     <div class="top-actions">
       <button class="icon-btn hidden" id="goList">No ar (<span id="listCount">0</span>)</button>
@@ -113,94 +132,110 @@
     </div>
   </div>
 
-  <!-- ============ ONBOARDING ============ -->
+  <!-- ============ ONBOARDING (tutorial visual) ============ -->
   <div id="scr-onboarding">
     <div class="card">
-      <div class="frame-info">Publique frames do Figma como páginas de preview no ar, no seu próprio Cloudflare Worker.</div>
+      <div class="frame-info">Publique frames do Figma como páginas de preview no ar, no seu próprio Cloudflare Worker. Configure uma vez:</div>
     </div>
+
     <div class="card">
-      <label class="label">1. Crie o backend (1 clique)</label>
-      <a class="btn-link" id="deployBtn" target="_blank" href="#">Deploy to Cloudflare</a>
-      <div class="hint">Cria o Worker + bucket R2 na sua conta automaticamente. Depois volta aqui.</div>
-    </div>
-    <div class="card">
-      <label class="label">2. Defina o token (UPLOAD_SECRET)</label>
-      <div class="row-btns">
-        <input type="text" id="genToken" placeholder="clique em Gerar" readonly>
-        <button class="btn-ghost" id="genBtn" style="width:auto;white-space:nowrap">Gerar</button>
+      <div class="step-row">
+        <div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 010-8 5 5 0 019.6-1.5A3.5 3.5 0 0117 18H7z"/><path d="M12 18v-6M9.5 14.5L12 12l2.5 2.5"/></svg></div>
+        <div class="step-body">
+          <div class="step-title"><span class="n">1.</span>Crie o backend (1 clique)</div>
+          <a class="btn-blue" id="deployBtn" target="_blank" href="#" style="display:block;text-align:center;text-decoration:none;padding:11px;border-radius:8px;font-weight:600">Deploy to Cloudflare</a>
+          <div class="hint">Cria o Worker + bucket R2 na sua conta automaticamente. Depois volta aqui.</div>
+        </div>
       </div>
-      <div class="hint">No Worker recém-criado: <b>Settings → Variables and Secrets → Add</b>, tipo <b>Secret</b>, nome <b>UPLOAD_SECRET</b>, e cole esse valor.</div>
     </div>
+
     <div class="card">
-      <label class="label">3. Conecte o plugin</label>
-      <input type="text" id="workerUrl" placeholder="https://pageview.seuusuario.workers.dev">
-      <div class="gap"></div>
-      <input type="password" id="secret" placeholder="cole o mesmo UPLOAD_SECRET">
+      <div class="step-row">
+        <div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11.5 11.5L20 3M17 6l2 2M14 9l2 2"/></svg></div>
+        <div class="step-body">
+          <div class="step-title"><span class="n">2.</span>Defina o token</div>
+          <div class="row-btns">
+            <input type="text" id="genToken" placeholder="clique em Gerar" readonly>
+            <button class="btn-ghost" id="genBtn" style="width:auto;white-space:nowrap">Gerar</button>
+          </div>
+          <div class="hint">No Worker: <span class="hl">Settings → Variables and Secrets → Add</span>, tipo <span class="hl">Secret</span>, nome <span class="hl">UPLOAD_SECRET</span>, e cole esse valor.</div>
+        </div>
+      </div>
     </div>
-    <button id="testBtn" disabled>Testar conexão</button>
-    <div id="onbStatus" class="error hidden" style="margin-top:10px;font-size:11px"></div>
+
+    <div class="card">
+      <div class="step-row">
+        <div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15l6-6M8.5 11.5l-2 2a3 3 0 104.2 4.2l2-2M15.5 12.5l2-2a3 3 0 10-4.2-4.2l-2 2"/></svg></div>
+        <div class="step-body">
+          <div class="step-title"><span class="n">3.</span>Conecte o plugin</div>
+          <input type="text" id="workerUrl" placeholder="https://pageview.seuusuario.workers.dev">
+          <div class="gap"></div>
+          <input type="password" id="secret" placeholder="cole o mesmo UPLOAD_SECRET">
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-blue" id="testBtn" disabled>Testar conexão</button>
+    <div id="onbStatus" class="hidden" style="margin-top:10px;font-size:11px;color:var(--danger)"></div>
   </div>
 
-  <!-- ============ WIZARD ============ -->
-  <div id="scr-wizard" class="hidden">
-    <div class="steps">
-      <div class="dot" id="d1"></div><div class="line"></div>
-      <div class="dot" id="d2"></div><div class="line"></div>
-      <div class="dot" id="d3"></div>
-      <span class="steplabel" id="stepLabel">passo 1/3</span>
-    </div>
+  <!-- ============ TELA PRINCIPAL (seções que destravam) ============ -->
+  <div id="scr-main" class="hidden">
 
-    <!-- passo 1 -->
-    <div id="step-1">
-      <div class="card">
-        <div class="frame-info" id="frameInfo">Selecione o frame da página no canvas.</div>
+    <section class="step" id="sec1">
+      <div class="step-head"><span class="step-num">1</span>Selecione o frame</div>
+      <div class="step-body-wrap">
+        <div class="card"><div class="frame-info" id="frameInfo">Selecione o frame da página no canvas.</div></div>
       </div>
-      <button id="toStep2" disabled>Avançar</button>
-    </div>
+    </section>
 
-    <!-- passo 2 -->
-    <div id="step-2" class="hidden">
-      <div class="card">
-        <label class="label">Endereço do preview</label>
-        <input type="text" id="slug" placeholder="liso-supremo">
-        <div class="finalurl" id="finalUrl"></div>
-      </div>
-      <div class="card">
-        <label class="label">Qualidade / tamanho</label>
-        <div class="seg">
-          <button id="qSharp" class="on" data-q="sharp">Nítido</button>
-          <button id="qLight" data-q="light">Leve</button>
+    <section class="step locked" id="sec2">
+      <div class="step-head"><span class="step-num">2</span>Configure<span class="lock">🔒 selecione um frame</span></div>
+      <div class="step-body-wrap">
+        <div class="card">
+          <label class="label">Endereço do preview</label>
+          <input type="text" id="slug" placeholder="liso-supremo">
+          <div class="finalurl" id="finalUrl"></div>
         </div>
-        <label class="check">
-          <input type="checkbox" id="banner" checked>
-          Tarja "visualização da versão desktop"
-        </label>
+        <div class="card">
+          <label class="label">Qualidade / tamanho</label>
+          <div class="seg">
+            <button id="qSharp" class="on" data-q="sharp">Nítido</button>
+            <button id="qLight" data-q="light">Leve</button>
+          </div>
+          <label class="check">
+            <input type="checkbox" id="banner" checked>
+            Tarja "visualização da versão desktop"
+          </label>
+        </div>
       </div>
-      <div class="row-btns">
-        <button class="btn-ghost" id="backTo1">Voltar</button>
-        <button id="publishBtn">Publicar</button>
-      </div>
-    </div>
+    </section>
 
-    <!-- passo 3 -->
-    <div id="step-3" class="hidden">
-      <div class="card">
-        <div id="status">Preparando…</div>
-        <div id="result" class="hidden" style="margin-top:6px">
+    <section class="step locked" id="sec3">
+      <div class="step-head"><span class="step-num">3</span>Publique<span class="lock">🔒 defina o endereço</span></div>
+      <div class="step-body-wrap">
+        <button class="btn-blue" id="publishBtn">Publicar</button>
+        <div id="progressWrap" class="hidden"><div id="progressBar"></div></div>
+        <div id="status"></div>
+        <div id="result" class="hidden" style="margin-top:8px">
           <a id="link" href="#" target="_blank"></a>
+          <div class="row-btns" style="margin-top:8px">
+            <button class="btn-ghost" id="copyBtn">Copiar link</button>
+            <button class="btn-ghost" id="openBtn">Abrir</button>
+          </div>
         </div>
       </div>
-      <div id="doneBtns" class="row-btns hidden">
-        <button class="btn-ghost" id="copyBtn">Copiar link</button>
-        <button id="againBtn">Publicar outro</button>
-      </div>
-    </div>
+    </section>
   </div>
 
   <!-- ============ NO AR ============ -->
   <div id="scr-list" class="hidden">
-    <div class="card">
-      <div id="list"><div class="empty">Nenhum preview no ar.</div></div>
+    <div class="list-head">
+      <span class="label" style="margin:0">No ar</span>
+      <button id="clearList">Limpar lista</button>
+    </div>
+    <div class="card" style="padding:6px 14px">
+      <div id="list"><div class="empty">Nenhum preview publicado ainda.</div></div>
     </div>
     <button class="btn-ghost" id="backFromList">Voltar</button>
   </div>
@@ -208,12 +243,15 @@
 <script>
   var $ = function(id){ return document.getElementById(id); };
 
-  // ---------- estado ----------
+  var ICON_DOC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l5 5v12a1 1 0 01-1 1H6a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M14 3v5h5"/></svg>';
+
   var state = {
     connected:false, workerUrl:"", secret:"",
-    hasSelection:false, slug:"", slugTouched:false,
+    hasSelection:false, slugTouched:false,
     quality:"sharp", banner:true,
-    lastUrl:"", listItems:[]
+    lastUrl:"",
+    live:[],      // previews no ar (do worker)
+    removed:[]    // desativados: [{slug,updated,bytes}]
   };
 
   function send(msg){ parent.postMessage({ pluginMessage: msg }, "*"); }
@@ -225,21 +263,19 @@
     return u;
   }
 
-  // ---------- navegação entre telas ----------
   function show(screen){
-    ["onboarding","wizard","list"].forEach(function(s){
+    ["onboarding","main","list"].forEach(function(s){
       $("scr-"+s).classList.toggle("hidden", s!==screen);
     });
-    $("goList").classList.toggle("hidden", !state.connected || screen!=="wizard");
-    $("goConfig").classList.toggle("hidden", !state.connected || screen!=="wizard");
+    $("goList").classList.toggle("hidden", !state.connected || screen!=="main");
+    $("goConfig").classList.toggle("hidden", !state.connected || screen!=="main");
   }
 
-  function goStep(n){
-    ["1","2","3"].forEach(function(s){ $("step-"+s).classList.toggle("hidden", s!==String(n)); });
-    ["d1","d2","d3"].forEach(function(d,i){
-      $(d).className = "dot" + (i+1===n?" active":(i+1<n?" done":""));
-    });
-    $("stepLabel").textContent = "passo " + n + "/3";
+  // ---------- destravar seções ----------
+  function updateLocks(){
+    var slug = $("slug").value.trim();
+    $("sec2").classList.toggle("locked", !state.hasSelection);
+    $("sec3").classList.toggle("locked", !(state.hasSelection && slug));
   }
 
   // ---------- onboarding ----------
@@ -247,18 +283,15 @@
     $("testBtn").disabled = !$("workerUrl").value.trim() || !$("secret").value.trim();
   }
   function updateDeployHref(){
-    // troque eurodrigobispo/pageview pelo caminho real do repo publicado
     $("deployBtn").href = "https://deploy.workers.cloudflare.com/?url=https://github.com/eurodrigobispo/pageview";
   }
   function genPassword(){
     var chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
-    var out = "";
-    var arr = new Uint32Array(24);
+    var out = "", arr = new Uint32Array(24);
     (crypto || window.crypto).getRandomValues(arr);
     for (var i=0;i<arr.length;i++) out += chars[arr[i] % chars.length];
     return out;
   }
-
   async function testConnection(){
     var base = normBase($("workerUrl").value);
     var secret = $("secret").value.trim();
@@ -272,10 +305,9 @@
       if (!data.secretConfigured) throw new Error("UPLOAD_SECRET ainda não foi definido no Worker.");
       state.connected = true; state.workerUrl = base; state.secret = secret;
       send({ type:"save-settings", workerUrl:base, secret:secret });
-      show("wizard"); goStep(1);
+      show("main"); updateLocks();
     } catch (err) {
       var m = (err && err.message) || String(err);
-      // fetch bloqueado pelo sandbox / rede inalcançável lança TypeError
       if (err instanceof TypeError) {
         m = "Não consegui alcançar o Worker. Confira a URL. Se você usa domínio próprio, adicione-o em networkAccess.allowedDomains no manifest.json.";
       }
@@ -286,10 +318,16 @@
     }
   }
 
-  // ---------- passo 2: slug / url final ----------
+  // ---------- configurar ----------
   function updateFinalUrl(){
     var b = state.workerUrl, s = $("slug").value.trim();
     $("finalUrl").innerHTML = (b && s) ? "No ar em: <span>" + b + "/" + s + "</span>" : "";
+  }
+
+  // ---------- progresso ----------
+  function setProgress(pct){
+    $("progressWrap").classList.remove("hidden");
+    $("progressBar").style.width = Math.max(0, Math.min(100, pct)) + "%";
   }
 
   // ---------- publicar ----------
@@ -333,6 +371,7 @@
       var f = files[i];
       $("status").textContent = "Enviando " + (i+1) + "/" + files.length +
         " (" + Math.round(f.bytes.length/1024) + " KB)…";
+      setProgress(50 + ((i+1)/files.length)*50);
       var ct = f.path.endsWith(".html") ? "text/html;charset=utf-8"
         : f.path.endsWith(".webp") ? "image/webp" : "image/png";
       var res = await fetch(base + "/api/upload/" + slug + "/" + f.path, {
@@ -345,47 +384,49 @@
     }
   }
 
-  // recebe as imagens PNG do code.js, converte, monta html e sobe
   async function onExported(images, meta){
     try {
       var out = [];
       for (var i=0;i<images.length;i++){
         $("status").textContent = "Otimizando imagem " + (i+1) + "/" + images.length + "…";
+        setProgress(20 + ((i+1)/images.length)*30);
         var webp = await toWebp(images[i].bytes, state.quality);
-        if (webp){
-          out.push({ path: images[i].path.replace(/\.png$/,".webp"), bytes: webp });
-        } else {
-          out.push({ path: images[i].path, bytes: images[i].bytes });
-        }
+        if (webp) out.push({ path: images[i].path.replace(/\.png$/,".webp"), bytes: webp });
+        else out.push({ path: images[i].path, bytes: images[i].bytes });
       }
       var version = Date.now().toString(36);
       var html = buildHtml({
         title: meta.title, width: meta.width, bg: meta.bg,
         banner: state.banner, version: version, images: out
       });
+      var slug = $("slug").value.trim();
       var files = out.concat([{ path:"index.html", bytes: new TextEncoder().encode(html) }]);
-      await uploadAll(state.workerUrl, state.secret, state.slug, files);
+      await uploadAll(state.workerUrl, state.secret, slug, files);
 
-      state.lastUrl = state.workerUrl + "/" + state.slug;
-      document.body.classList.remove("spin");
+      // republicado? tira da lista de desativados
+      state.removed = state.removed.filter(function(r){ return r.slug !== slug; });
+      send({ type:"save-removed", items: state.removed });
+
+      state.lastUrl = state.workerUrl + "/" + slug;
+      setProgress(100);
       $("status").className = ""; $("status").textContent = "No ar ✓";
       $("result").classList.remove("hidden");
       $("link").textContent = state.lastUrl; $("link").href = state.lastUrl;
-      $("doneBtns").classList.remove("hidden");
+      $("publishBtn").disabled = false; $("publishBtn").textContent = "Publicar de novo";
       notify("Preview no ar: " + state.lastUrl);
     } catch (err){
-      document.body.classList.remove("spin");
       $("status").className = "error"; $("status").textContent = (err && err.message) || String(err);
+      $("publishBtn").disabled = false;
     }
   }
 
   function startPublish(){
-    state.slug = $("slug").value.trim();
-    if (!state.slug){ notify("Defina o endereço do preview."); return; }
-    goStep(3);
-    $("result").classList.add("hidden"); $("doneBtns").classList.add("hidden");
+    var slug = $("slug").value.trim();
+    if (!slug){ notify("Defina o endereço do preview."); return; }
+    $("result").classList.add("hidden");
     $("status").className = ""; $("status").textContent = "Exportando…";
-    document.body.classList.add("spin");
+    $("publishBtn").disabled = true;
+    setProgress(8);
     send({ type:"export", quality: state.quality });
   }
 
@@ -407,22 +448,35 @@
       });
       if (!res.ok) throw new Error("Falha ao listar (" + res.status + ")");
       var data = await res.json();
-      state.listItems = data.items || [];
-      $("listCount").textContent = state.listItems.length;
+      state.live = data.items || [];
+      // limpa desativados que voltaram ao ar
+      var liveSlugs = {};
+      state.live.forEach(function(it){ liveSlugs[it.slug] = true; });
+      var before = state.removed.length;
+      state.removed = state.removed.filter(function(r){ return !liveSlugs[r.slug]; });
+      if (state.removed.length !== before) send({ type:"save-removed", items: state.removed });
       renderList();
     } catch (err){ notify((err && err.message) || String(err)); }
   }
-  function renderList(){
-    var box = $("list"); box.innerHTML = "";
-    if (!state.listItems.length){ box.innerHTML = '<div class="empty">Nenhum preview no ar.</div>'; return; }
-    state.listItems.forEach(function(it){
-      var row = document.createElement("div"); row.className = "lrow";
-      var main = document.createElement("div"); main.className = "lrow-main";
-      var a = document.createElement("a");
-      a.href = state.workerUrl + "/" + it.slug; a.target = "_blank"; a.textContent = it.slug;
-      var meta = document.createElement("div"); meta.className = "lrow-meta";
-      meta.textContent = fmtDate(it.updated) + " · " + fmtSize(it.bytes);
-      main.appendChild(a); main.appendChild(meta);
+  function rowEl(it, active){
+    var row = document.createElement("div");
+    row.className = "lrow" + (active ? "" : " inactive");
+
+    var ic = document.createElement("div"); ic.className = "lrow-ic"; ic.innerHTML = ICON_DOC;
+
+    var dot = document.createElement("span"); dot.className = "dot " + (active ? "on" : "off");
+
+    var main = document.createElement("div"); main.className = "lrow-main";
+    var a = document.createElement("a");
+    a.textContent = it.slug;
+    if (active){ a.href = state.workerUrl + "/" + it.slug; a.target = "_blank"; }
+    var meta = document.createElement("div"); meta.className = "lrow-meta";
+    meta.textContent = fmtDate(it.updated) + " · " + fmtSize(it.bytes) + (active ? "" : " · fora do ar");
+    main.appendChild(a); main.appendChild(meta);
+
+    row.appendChild(ic); row.appendChild(dot); row.appendChild(main);
+
+    if (active){
       var btn = document.createElement("button"); btn.textContent = "Tirar do ar";
       var armed = false, timer = null;
       btn.onclick = function(){
@@ -431,24 +485,55 @@
           timer = setTimeout(function(){ armed=false; btn.textContent="Tirar do ar"; btn.classList.remove("confirm"); }, 3000);
         } else {
           clearTimeout(timer); btn.disabled = true; btn.textContent = "Removendo…";
-          removePreview(it.slug);
+          removePreview(it);
         }
       };
-      row.appendChild(main); row.appendChild(btn); box.appendChild(row);
-    });
+      row.appendChild(btn);
+    }
+    return row;
   }
-  async function removePreview(slug){
+  function renderList(){
+    var box = $("list"); box.innerHTML = "";
+    var total = state.live.length + state.removed.length;
+    $("listCount").textContent = state.live.length;
+    if (!total){ box.innerHTML = '<div class="empty">Nenhum preview publicado ainda.</div>'; return; }
+    state.live.forEach(function(it){ box.appendChild(rowEl(it, true)); });
+    state.removed.forEach(function(it){ box.appendChild(rowEl(it, false)); });
+  }
+  async function removePreview(it){
     try {
-      var res = await fetch(state.workerUrl + "/api/preview/" + slug, {
+      var res = await fetch(state.workerUrl + "/api/preview/" + it.slug, {
         method:"DELETE", headers:{ "Authorization":"Bearer " + state.secret }
       });
       if (!res.ok) throw new Error("Falha ao remover (" + res.status + ")");
-      notify("Preview removido: " + slug);
-      await loadList();
-    } catch (err){ notify((err && err.message) || String(err)); loadList(); /* re-render pra reabilitar o botão */ }
+      // sai do ar, mas fica na lista como desativado
+      state.live = state.live.filter(function(l){ return l.slug !== it.slug; });
+      if (!state.removed.some(function(r){ return r.slug === it.slug; })){
+        state.removed.unshift({ slug: it.slug, updated: it.updated, bytes: it.bytes });
+      }
+      send({ type:"save-removed", items: state.removed });
+      notify("Fora do ar: " + it.slug);
+      renderList();
+    } catch (err){ notify((err && err.message) || String(err)); renderList(); }
+  }
+  var clearArmed = false, clearTimer = null;
+  function clearList(){
+    if (!state.removed.length){ notify("Nada desativado pra limpar."); return; }
+    if (!clearArmed){
+      clearArmed = true;
+      $("clearList").textContent = "Confirmar limpar?";
+      $("clearList").classList.add("confirm");
+      clearTimer = setTimeout(function(){ clearArmed=false; $("clearList").textContent="Limpar lista"; $("clearList").classList.remove("confirm"); }, 3000);
+      return;
+    }
+    clearTimeout(clearTimer); clearArmed = false;
+    $("clearList").textContent = "Limpar lista"; $("clearList").classList.remove("confirm");
+    state.removed = [];
+    send({ type:"save-removed", items: state.removed });
+    renderList();
   }
 
-  // ---------- mensagens vindas do code.js ----------
+  // ---------- mensagens do code.js ----------
   window.onmessage = function(e){
     var msg = e.data.pluginMessage;
     if (!msg) return;
@@ -459,11 +544,13 @@
       updateDeployHref(); refreshTestBtn();
       if (msg.workerUrl && msg.secret){
         state.workerUrl = normBase(msg.workerUrl); state.secret = msg.secret;
-        testConnection(); // reconecta silenciosamente; se falhar, cai no onboarding
+        testConnection();
       } else {
         show("onboarding");
       }
     }
+
+    if (msg.type === "removed"){ state.removed = msg.items || []; }
 
     if (msg.type === "selection"){
       state.hasSelection = msg.ok;
@@ -476,14 +563,14 @@
       } else {
         $("frameInfo").textContent = "Selecione o frame da página no canvas.";
       }
-      $("toStep2").disabled = !state.hasSelection;
+      updateLocks();
     }
 
-    if (msg.type === "progress"){ $("status").textContent = msg.msg; }
+    if (msg.type === "progress"){ $("status").textContent = msg.msg; setProgress(12); }
     if (msg.type === "exported"){ onExported(msg.images, msg.meta); }
     if (msg.type === "export-error"){
-      document.body.classList.remove("spin");
       $("status").className = "error"; $("status").textContent = msg.msg;
+      $("publishBtn").disabled = false;
     }
   };
 
@@ -494,12 +581,11 @@
   $("testBtn").onclick = testConnection;
 
   $("goList").onclick = function(){ show("list"); loadList(); };
-  $("backFromList").onclick = function(){ show("wizard"); };
+  $("backFromList").onclick = function(){ show("main"); };
   $("goConfig").onclick = function(){ state.connected = false; show("onboarding"); };
+  $("clearList").onclick = clearList;
 
-  $("toStep2").onclick = function(){ goStep(2); updateFinalUrl(); };
-  $("backTo1").onclick = function(){ goStep(1); };
-  $("slug").addEventListener("input", function(){ state.slugTouched = true; updateFinalUrl(); });
+  $("slug").addEventListener("input", function(){ state.slugTouched = true; updateFinalUrl(); updateLocks(); });
   $("qSharp").onclick = function(){ state.quality="sharp"; this.classList.add("on"); $("qLight").classList.remove("on"); };
   $("qLight").onclick = function(){ state.quality="light"; this.classList.add("on"); $("qSharp").classList.remove("on"); };
   $("banner").addEventListener("change", function(){ state.banner = this.checked; });
@@ -511,7 +597,7 @@
     $("copyBtn").textContent = "Copiado ✓";
     setTimeout(function(){ $("copyBtn").textContent = "Copiar link"; }, 1500);
   };
-  $("againBtn").onclick = function(){ goStep(1); };
+  $("openBtn").onclick = function(){ if (state.lastUrl) window.open(state.lastUrl, "_blank"); };
 
   send({ type:"init" });
 </script>
