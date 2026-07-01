@@ -4,3 +4,5 @@ node_modules/
 *.log
 # planejamento interno (não vai pro repo público)
 docs/superpowers/
+.playwright-mcp/
+readme-render.png
