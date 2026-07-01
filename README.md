@@ -3,7 +3,11 @@
 Publique frames do Figma como páginas de preview no ar — hospedadas no seu
 próprio Cloudflare Worker + R2. Um plugin, um link, sem servidor pra manter.
 
-![Pageview](docs/screenshots/plugin.png)
+<p align="center">
+  <img src="docs/screenshots/onboarding.png" width="330" alt="Onboarding do Pageview: botão Deploy to Cloudflare, gerar token e conectar">
+  &nbsp;&nbsp;
+  <img src="docs/screenshots/wizard.png" width="330" alt="Wizard de publicação: endereço, qualidade Nítido/Leve e tarja">
+</p>
 
 ## Como funciona
 
