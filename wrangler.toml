@@ -1,0 +1,7 @@
+name = "pageview"
+main = "worker/worker.js"
+compatibility_date = "2024-11-01"
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "pageview"

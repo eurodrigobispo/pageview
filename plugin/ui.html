@@ -1,0 +1,309 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root{
+    --bg:#050505; --card:#0C0C0C; --field:#101010; --border:#1D1D1D;
+    --text:#EFF0EB; --muted:#7B7B78; --danger:#E24B4A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--text);
+    background-image:radial-gradient(600px 220px at 50% -80px, rgba(239,240,235,.05), transparent 70%);
+    font:400 12px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    padding:18px 16px 16px; -webkit-font-smoothing:antialiased;
+  }
+  .ond{height:11px; width:auto; color:var(--muted); display:block; margin-bottom:16px}
+  .head{display:flex; align-items:center; gap:10px; margin-bottom:4px}
+  .iso{height:18px; width:18px; color:var(--text)}
+  .iso path{opacity:1}
+  .spin .iso path{animation:pvdot 1s linear infinite}
+  @keyframes pvdot{0%{opacity:1}100%{opacity:.08}}
+  h1{font:500 16px/1 inherit; letter-spacing:.01em}
+  .sub{color:var(--muted); font-size:11px; margin-bottom:14px}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px; margin-bottom:10px}
+  .label{color:var(--muted); font-size:11px; margin-bottom:5px; display:block}
+  input[type=text],input[type=password]{
+    width:100%; background:var(--field); border:1px solid var(--border); border-radius:8px;
+    color:var(--text); padding:8px 10px; font:inherit; outline:none;
+  }
+  input:focus{border-color:#3a3a3a}
+  .gap{height:10px}
+  .frame-info{font-size:11px; color:var(--muted); line-height:1.6}
+  .frame-info b{color:var(--text); font-weight:500}
+  .badge{display:inline-block; background:var(--field); border:1px solid var(--border);
+    border-radius:5px; padding:1px 7px; font-size:10px; color:var(--text); margin-left:6px}
+  .finalurl{margin-top:8px; font-size:10.5px; color:var(--muted); word-break:break-all}
+  .finalurl span{color:var(--text)}
+  .check{display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; margin-top:10px}
+  .check input{accent-color:#EFF0EB}
+  button{
+    width:100%; background:var(--text); color:#0a0a0a; border:0; border-radius:8px;
+    padding:11px; font:500 12px/1 inherit; cursor:pointer; letter-spacing:.02em;
+  }
+  button:hover:not(:disabled){background:#fff}
+  button:disabled{opacity:.35; cursor:default}
+  #status{margin-top:10px; font-size:11px; color:var(--muted); min-height:16px}
+  #status.error{color:var(--danger)}
+  #result{display:none; margin-top:10px}
+  #result a{color:var(--text); word-break:break-all; text-decoration:underline; text-underline-offset:3px; font-size:12px}
+  #copy{margin-top:8px; background:transparent; color:var(--muted); border:1px solid var(--border)}
+  #copy:hover{background:var(--card); color:var(--text)}
+
+  /* ---- No ar ---- */
+  .list-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:2px}
+  .list-head .label{margin:0}
+  #refresh{width:auto; background:transparent; color:var(--muted); border:0; padding:2px 6px; font-size:13px; line-height:1}
+  #refresh:hover{color:var(--text); background:transparent}
+  #list{max-height:168px; overflow-y:auto; margin-top:4px}
+  #list::-webkit-scrollbar{width:6px}
+  #list::-webkit-scrollbar-thumb{background:var(--border); border-radius:3px}
+  .row{display:flex; align-items:center; gap:8px; padding:8px 0; border-top:1px solid var(--border)}
+  .row:first-child{border-top:0}
+  .row-main{flex:1; min-width:0}
+  .row-main a{color:var(--text); font-size:12px; text-decoration:none; display:block;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .row-main a:hover{text-decoration:underline; text-underline-offset:3px}
+  .row-meta{color:var(--muted); font-size:10px}
+  .row button{width:auto; background:transparent; color:var(--muted); border:1px solid var(--border);
+    padding:5px 9px; font-size:10.5px; border-radius:6px; white-space:nowrap}
+  .row button:hover:not(:disabled){background:var(--card); color:var(--text)}
+  .row button.confirm{border-color:var(--danger); color:var(--danger)}
+  .row button.confirm:hover:not(:disabled){background:rgba(226,75,74,.08); color:var(--danger)}
+  .empty{color:var(--muted); font-size:11px; padding:6px 0}
+</style>
+</head>
+<body>
+  <svg class="ond" viewBox="0 0 1417 348" xmlns="http://www.w3.org/2000/svg"><path d="M202.551 49.1913C202.551 53.9856 198.665 57.8721 193.871 57.8721H153.36C148.566 57.8721 144.679 53.9856 144.679 49.1913V8.68082C144.679 3.88654 148.566 0 153.36 0H193.871C198.665 0 202.551 3.88653 202.551 8.68082V49.1913Z" fill="currentColor"/><path d="M202.551 338.552C202.551 343.346 198.665 347.233 193.871 347.233H153.36C148.566 347.233 144.679 343.346 144.679 338.552V298.041C144.679 293.247 148.566 289.36 153.36 289.36H193.871C198.665 289.36 202.551 293.247 202.551 298.041V338.552Z" fill="currentColor"/><path d="M106.098 97.418C106.098 102.212 102.212 106.099 97.4173 106.099H56.9068C52.1125 106.099 48.226 102.212 48.226 97.418V56.9075C48.226 52.1133 52.1125 48.2267 56.9068 48.2267H97.4173C102.212 48.2267 106.098 52.1133 106.098 56.9075V97.418Z" fill="currentColor"/><path d="M57.8721 193.872C57.8721 198.666 53.9856 202.552 49.1913 202.552H8.68082C3.88654 202.552 0 198.666 0 193.872V153.361C0 148.567 3.88653 144.68 8.68082 144.68H49.1913C53.9856 144.68 57.8721 148.567 57.8721 153.361V193.872Z" fill="currentColor"/><path d="M106.098 290.325C106.098 295.12 102.212 299.006 97.4173 299.006H56.9068C52.1125 299.006 48.226 295.12 48.226 290.325V249.815C48.226 245.021 52.1125 241.134 56.9068 241.134H97.4173C102.212 241.134 106.098 245.021 106.098 249.815V290.325Z" fill="currentColor"/><path d="M347.232 193.872C347.232 198.666 343.346 202.552 338.551 202.552H298.041C293.247 202.552 289.36 198.666 289.36 193.872V153.361C289.36 148.567 293.247 144.68 298.041 144.68H338.551C343.346 144.68 347.232 148.567 347.232 153.361V193.872Z" fill="currentColor"/><path d="M299.005 290.325C299.005 295.119 295.118 299.006 290.324 299.006H249.814C245.019 299.006 241.133 295.119 241.133 290.325V249.815C241.133 245.02 245.019 241.134 249.814 241.134H290.324C295.118 241.134 299.005 245.02 299.005 249.815V290.325Z" fill="currentColor"/><path d="M298.918 97.4329C298.918 102.227 295.031 106.114 290.237 106.114H249.727C244.932 106.114 241.046 102.227 241.046 97.4329V56.9224C241.046 52.1282 244.932 48.2416 249.727 48.2416H290.237C295.031 48.2416 298.918 52.1282 298.918 56.9224V97.4329Z" fill="currentColor"/><path d="M475.77 232.528V114.706H691.776V232.528H475.77ZM740.869 281.62V65.6137H426.677V281.62H740.869Z" fill="currentColor"/><path d="M863.156 65.6137H769.523V281.62H818.615V114.706H840.264L980.321 281.62H1073.66V65.6137H1024.57L1024.57 232.528H1003.21L863.156 65.6137Z" fill="currentColor"/><path d="M1102.31 65.6137V281.62H1416.51V122.737L1368.57 65.6137L1102.31 65.6137ZM1151.41 232.528V114.706L1333.24 114.706L1367.41 155.431V232.528H1151.41Z" fill="currentColor"/></svg>
+  <div class="head" id="head"><svg class="iso" viewBox="0 0 865 865" xmlns="http://www.w3.org/2000/svg"><path d="M144.078 482.662C144.078 494.597 134.402 504.273 122.466 504.273H21.6117C9.67589 504.273 0 494.597 0 482.662V381.807C0 369.871 9.67588 360.196 21.6117 360.196H122.466C134.402 360.196 144.078 369.871 144.078 381.807V482.662Z" fill="currentColor" style="animation-delay:-0.0s"/><path d="M264.141 722.792C264.141 734.728 254.465 744.404 242.529 744.404H141.675C129.739 744.404 120.063 734.728 120.063 722.792V621.938C120.063 610.002 129.739 600.326 141.675 600.326H242.529C254.465 600.326 264.141 610.002 264.141 621.938V722.792Z" fill="currentColor" style="animation-delay:-0.125s"/><path d="M504.27 842.856C504.27 854.792 494.594 864.468 482.659 864.468H381.804C369.868 864.468 360.192 854.792 360.192 842.856V742.002C360.192 730.066 369.868 720.39 381.804 720.39H482.659C494.594 720.39 504.27 730.066 504.27 742.002V842.856Z" fill="currentColor" style="animation-delay:-0.25s"/><path d="M744.4 722.791C744.4 734.727 734.724 744.403 722.788 744.403H621.933C609.998 744.403 600.322 734.727 600.322 722.791V621.937C600.322 610.001 609.998 600.325 621.933 600.325H722.788C734.724 600.325 744.4 610.001 744.4 621.937V722.791Z" fill="currentColor" style="animation-delay:-0.375s"/><path d="M864.466 482.662C864.466 494.597 854.79 504.273 842.854 504.273H742C730.064 504.273 720.388 494.597 720.388 482.662V381.807C720.388 369.871 730.064 360.196 742 360.196H842.854C854.79 360.196 864.466 369.871 864.466 381.807V482.662Z" fill="currentColor" style="animation-delay:-0.5s"/><path d="M744.183 242.569C744.183 254.505 734.507 264.181 722.571 264.181H621.717C609.781 264.181 600.105 254.505 600.105 242.569V141.715C600.105 129.779 609.781 120.103 621.717 120.103H722.571C734.507 120.103 744.183 129.779 744.183 141.715V242.569Z" fill="currentColor" style="animation-delay:-0.625s"/><path d="M504.27 122.467C504.27 134.403 494.594 144.079 482.659 144.079H381.804C369.868 144.079 360.192 134.403 360.192 122.467V21.6127C360.192 9.67686 369.868 0.000976562 381.804 0.000976562H482.659C494.594 0.000976562 504.27 9.67685 504.27 21.6127V122.467Z" fill="currentColor" style="animation-delay:-0.75s"/><path d="M264.141 242.532C264.141 254.468 254.465 264.144 242.529 264.144H141.675C129.739 264.144 120.063 254.468 120.063 242.532V141.677C120.063 129.742 129.739 120.066 141.675 120.066H242.529C254.465 120.066 264.141 129.742 264.141 141.677V242.532Z" fill="currentColor" style="animation-delay:-0.875s"/></svg><h1>Pageview</h1></div>
+  <div class="sub">Preview de páginas direto do canvas.</div>
+
+  <div class="card">
+    <label class="label">Worker URL</label>
+    <input type="text" id="workerUrl" placeholder="https://pageview.seuusuario.workers.dev">
+    <div class="gap"></div>
+    <label class="label">Token <span style="color:var(--muted)">(UPLOAD_SECRET · salvo só no seu Figma)</span></label>
+    <input type="password" id="secret" placeholder="••••••••">
+  </div>
+
+  <div class="card">
+    <div class="frame-info" id="frameInfo">Seleciona o frame da página no canvas.</div>
+  </div>
+
+  <div class="card">
+    <label class="label">Endereço do preview</label>
+    <input type="text" id="slug" placeholder="liso-supremo">
+    <div class="finalurl" id="finalUrl"></div>
+    <label class="check">
+      <input type="checkbox" id="banner" checked>
+      Tarja “visualização da versão desktop”
+    </label>
+  </div>
+
+  <button id="publish" disabled>Publicar preview</button>
+  <div id="status"></div>
+  <div id="result">
+    <a id="link" href="#" target="_blank"></a>
+    <button id="copy">Copiar link</button>
+  </div>
+
+  <div class="card" style="margin-top:10px">
+    <div class="list-head">
+      <span class="label">No ar</span>
+      <button id="refresh" title="Atualizar lista">↻</button>
+    </div>
+    <div id="list"><div class="empty">Conecta o Worker pra ver os previews no ar.</div></div>
+  </div>
+
+<script>
+  var $ = function(id){ return document.getElementById(id); };
+  var hasSelection = false;
+  var listBase = "";
+  var listing = false;
+
+  function send(msg){ parent.postMessage({ pluginMessage: msg }, "*"); }
+
+  function normBase(u){
+    u = (u||"").trim().replace(/\/+$/,"");
+    if (u && !/^https?:\/\//i.test(u)) u = "https://" + u;
+    return u;
+  }
+
+  function creds(){
+    return { workerUrl: $("workerUrl").value, secret: $("secret").value };
+  }
+
+  function updateButton(){
+    $("publish").disabled = !hasSelection || !$("workerUrl").value.trim() || !$("secret").value.trim();
+  }
+
+  function updateFinalUrl(){
+    var b = normBase($("workerUrl").value), s = $("slug").value.trim();
+    $("finalUrl").innerHTML = (b && s) ? "No ar em: <span>" + b + "/" + s + "</span>" : "";
+  }
+
+  function fmtDate(t){
+    if (!t) return "";
+    var d = new Date(t);
+    return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" }) +
+      " " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function fmtSize(b){
+    if (!b) return "";
+    return b >= 1048576 ? (b/1048576).toFixed(1) + " MB" : Math.round(b/1024) + " KB";
+  }
+
+  function renderList(items, base){
+    listBase = base;
+    var box = $("list");
+    box.innerHTML = "";
+    if (!items.length){
+      box.innerHTML = '<div class="empty">Nenhum preview no ar.</div>';
+      return;
+    }
+    items.forEach(function(it){
+      var row = document.createElement("div");
+      row.className = "row";
+
+      var main = document.createElement("div");
+      main.className = "row-main";
+      var a = document.createElement("a");
+      a.href = base + "/" + it.slug;
+      a.target = "_blank";
+      a.textContent = it.slug;
+      var meta = document.createElement("div");
+      meta.className = "row-meta";
+      meta.textContent = fmtDate(it.updated) + " · " + fmtSize(it.bytes);
+      main.appendChild(a); main.appendChild(meta);
+
+      var btn = document.createElement("button");
+      btn.textContent = "Tirar do ar";
+      var armed = false, timer = null;
+      btn.onclick = function(){
+        if (!armed){
+          armed = true;
+          btn.textContent = "Confirmar?";
+          btn.classList.add("confirm");
+          timer = setTimeout(function(){
+            armed = false;
+            btn.textContent = "Tirar do ar";
+            btn.classList.remove("confirm");
+          }, 3000);
+        } else {
+          clearTimeout(timer);
+          btn.disabled = true;
+          btn.textContent = "Removendo\u2026";
+          var c = creds();
+          send({ type: "remove", workerUrl: c.workerUrl, secret: c.secret, slug: it.slug });
+        }
+      };
+
+      row.appendChild(main);
+      row.appendChild(btn);
+      box.appendChild(row);
+    });
+  }
+
+  function requestList(){
+    if (listing) return;
+    var c = creds();
+    if (c.workerUrl.trim() && c.secret.trim()){
+      listing = true;
+      send({ type: "list", workerUrl: c.workerUrl, secret: c.secret });
+    }
+  }
+
+  window.onmessage = function(e){
+    var msg = e.data.pluginMessage;
+    if (!msg) return;
+
+    if (msg.type === "settings"){
+      $("workerUrl").value = msg.workerUrl || "";
+      $("secret").value = msg.secret || "";
+      updateButton(); updateFinalUrl();
+      requestList();
+    }
+
+    if (msg.type === "selection"){
+      hasSelection = msg.ok;
+      if (msg.ok){
+        var mode = msg.sections > 0
+          ? '<span class="badge">' + msg.sections + ' seções</span>'
+          : '<span class="badge">página inteira</span>';
+        $("frameInfo").innerHTML = "<b>" + msg.name + "</b> · " + msg.width + "×" + msg.height + mode;
+        if (!$("slug").value || $("slug").dataset.auto !== "0"){
+          $("slug").value = msg.slug;
+        }
+      } else {
+        $("frameInfo").textContent = "Seleciona o frame da página no canvas.";
+      }
+      updateButton(); updateFinalUrl();
+    }
+
+    if (msg.type === "progress"){
+      $("status").className = "";
+      $("status").textContent = msg.msg;
+    }
+
+    if (msg.type === "previews"){
+      listing = false;
+      renderList(msg.items, msg.base);
+    }
+
+    if (msg.type === "done"){
+      document.body.classList.remove("spin");
+      $("publish").disabled = false;
+      $("status").className = "";
+      $("status").textContent = "No ar ✓";
+      $("result").style.display = "block";
+      $("link").textContent = msg.url;
+      $("link").href = msg.url;
+    }
+
+    if (msg.type === "error"){
+      listing = false;
+      document.body.classList.remove("spin");
+      $("publish").disabled = false;
+      $("status").className = "error";
+      $("status").textContent = msg.msg;
+    }
+  };
+
+  $("slug").addEventListener("input", function(){ this.dataset.auto = "0"; updateFinalUrl(); });
+  $("workerUrl").addEventListener("input", function(){ updateButton(); updateFinalUrl(); });
+  $("secret").addEventListener("input", updateButton);
+  $("refresh").onclick = requestList;
+
+  $("publish").onclick = function(){
+    $("publish").disabled = true;
+    $("result").style.display = "none";
+    $("status").className = "";
+    $("status").textContent = "Preparando\u2026";
+    document.body.classList.add("spin");
+    var c = creds();
+    send({
+      type: "publish",
+      workerUrl: c.workerUrl,
+      secret: c.secret,
+      slug: $("slug").value,
+      banner: $("banner").checked
+    });
+  };
+
+  $("copy").onclick = function(){
+    var ta = document.createElement("textarea");
+    ta.value = $("link").textContent;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+    $("copy").textContent = "Copiado \u2713";
+    setTimeout(function(){ $("copy").textContent = "Copiar link"; }, 1500);
+  };
+
+  send({ type: "init" });
+</script>
+</body>
+</html>

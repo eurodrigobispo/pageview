@@ -1,0 +1,12 @@
+{
+  "name": "Pageview",
+  "id": "1000000000000000002",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "networkAccess": {
+    "allowedDomains": ["https://*.workers.dev"],
+    "reasoning": "Publica previews de páginas no seu Worker da Cloudflare"
+  }
+}
